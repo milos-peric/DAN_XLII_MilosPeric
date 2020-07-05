@@ -1,11 +1,10 @@
-﻿using DAN_XLII_MilosPeric.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAN_XLII_MilosPeric
+namespace DAN_XLII_MilosPeric.Service
 {
     class DataBaseService
     {
@@ -57,8 +56,6 @@ namespace DAN_XLII_MilosPeric
             }
         }
 
-
-
         internal vwWorker EditWorker(vwWorker worker)
         {
             try
@@ -102,6 +99,31 @@ namespace DAN_XLII_MilosPeric
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
+            }
+        }
+
+        internal List<tblLocation> AddLocationsToDataBase(List<tblLocation> locationListFromFile)
+        {
+            try
+            {
+                using (WorkerManagementEntities context = new WorkerManagementEntities())
+                {
+                    foreach (var location in locationListFromFile)
+                    {
+                        tblLocation locations = new tblLocation();
+                        locations.Address = location.Address;
+                        locations.City = location.City;
+                        locations.Country = location.Country;
+                        context.tblLocations.Add(locations);
+                        context.SaveChanges();
+                    }
+                    return locationListFromFile;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
             }
         }
 

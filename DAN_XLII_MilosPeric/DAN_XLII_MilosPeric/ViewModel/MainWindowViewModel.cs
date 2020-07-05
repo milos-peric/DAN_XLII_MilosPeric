@@ -1,5 +1,6 @@
 ﻿using DAN_XLII_MilosPeric.Commands;
-using DAN_XLII_MilosPeric.Model;
+using DAN_XLII_MilosPeric.Service;
+using DAN_XLII_MilosPeric.Utility;
 using DAN_XLII_MilosPeric.View;
 using System;
 using System.Collections.Generic;
@@ -15,11 +16,24 @@ namespace DAN_XLII_MilosPeric.ViewModel
     {
         MainWindow _main;
         DataBaseService _dataBaseService = new DataBaseService();
+        List<vwLocation> LocationListFromDB = new List<vwLocation>();
+        List<tblLocation> LocationListFromFile = new List<tblLocation>();
+
 
         public MainWindowViewModel(MainWindow mainOpen)
         {
             _main = mainOpen;
             WorkerList = _dataBaseService.GetAllWorkerRecords().ToList();
+            LocationListFromDB = _dataBaseService.GetAllLocations();
+            if (LocationListFromDB.Count == 0)
+            {
+                LocationListFromFile = LocationLoader.LoadLocations();
+                _dataBaseService.AddLocationsToDataBase(LocationListFromFile);
+            }
+            foreach (var item in LocationListFromFile)
+            {
+                System.Diagnostics.Debug.WriteLine("Location: " + item.Address + item.City + item.Country);
+            }
         }
 
         #region Properties

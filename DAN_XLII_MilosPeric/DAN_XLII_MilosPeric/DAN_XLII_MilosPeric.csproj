@@ -65,39 +65,40 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
-    <Compile Include="Model\DataBaseService.cs" />
-    <Compile Include="Model\tblGender.cs">
+    <Compile Include="Service\DataBaseService.cs" />
+    <Compile Include="tblGender.cs">
       <DependentUpon>WorkerDataBaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\tblLocation.cs">
+    <Compile Include="tblLocation.cs">
       <DependentUpon>WorkerDataBaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\tblSector.cs">
+    <Compile Include="tblSector.cs">
       <DependentUpon>WorkerDataBaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\tblWorker.cs">
+    <Compile Include="tblWorker.cs">
       <DependentUpon>WorkerDataBaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\vwLocation.cs">
+    <Compile Include="Utility\LocationLoader.cs" />
+    <Compile Include="vwLocation.cs">
       <DependentUpon>WorkerDataBaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\vwManager.cs">
+    <Compile Include="vwManager.cs">
       <DependentUpon>WorkerDataBaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\vwWorker.cs">
+    <Compile Include="vwWorker.cs">
       <DependentUpon>WorkerDataBaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\WorkerDataBaseModel.Context.cs">
+    <Compile Include="WorkerDataBaseModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>WorkerDataBaseModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\WorkerDataBaseModel.cs">
+    <Compile Include="WorkerDataBaseModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>WorkerDataBaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\WorkerDataBaseModel.Designer.cs">
+    <Compile Include="WorkerDataBaseModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>WorkerDataBaseModel.edmx</DependentUpon>
@@ -152,11 +153,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Model\WorkerDataBaseModel.edmx">
+    <EntityDeploy Include="WorkerDataBaseModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>WorkerDataBaseModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model\WorkerDataBaseModel.edmx.diagram">
+    <None Include="WorkerDataBaseModel.edmx.diagram">
       <DependentUpon>WorkerDataBaseModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -172,12 +173,12 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model\WorkerDataBaseModel.Context.tt">
+    <Content Include="WorkerDataBaseModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>WorkerDataBaseModel.edmx</DependentUpon>
       <LastGenOutput>WorkerDataBaseModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model\WorkerDataBaseModel.tt">
+    <Content Include="WorkerDataBaseModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>WorkerDataBaseModel.edmx</DependentUpon>
       <LastGenOutput>WorkerDataBaseModel.cs</LastGenOutput>

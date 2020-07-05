@@ -7,21 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DAN_XLII_MilosPeric.Model
+namespace DAN_XLII_MilosPeric
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class tblGender
+    public partial class tblSector
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblGender()
+        public tblSector()
         {
             this.tblWorkers = new HashSet<tblWorker>();
         }
     
-        public int GenderID { get; set; }
-        public string GenderName { get; set; }
+        public int SectorID { get; set; }
+        public string SectorName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblWorker> tblWorkers { get; set; }

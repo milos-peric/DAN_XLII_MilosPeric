@@ -12,7 +12,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using DAN_XLII_MilosPeric.Model;
 
 namespace DAN_XLII_MilosPeric.View
 {

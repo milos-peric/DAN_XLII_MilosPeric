@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DAN_XLII_MilosPeric.Model
+namespace DAN_XLII_MilosPeric
 {
     using System;
     using System.Collections.Generic;

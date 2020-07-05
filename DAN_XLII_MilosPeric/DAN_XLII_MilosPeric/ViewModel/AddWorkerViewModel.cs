@@ -1,5 +1,5 @@
 ﻿using DAN_XLII_MilosPeric.Commands;
-using DAN_XLII_MilosPeric.Model;
+using DAN_XLII_MilosPeric.Service;
 using DAN_XLII_MilosPeric.View;
 using DAN_XLII_MilosPeric.Validation;
 using System;

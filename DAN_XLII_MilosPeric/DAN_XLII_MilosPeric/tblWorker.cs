@@ -7,13 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DAN_XLII_MilosPeric.Model
+namespace DAN_XLII_MilosPeric
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class vwWorker
+    public partial class tblWorker
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tblWorker()
+        {
+            this.tblWorker1 = new HashSet<tblWorker>();
+        }
+    
         public int WorkerID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -25,13 +31,12 @@ namespace DAN_XLII_MilosPeric.Model
         public int SectorID { get; set; }
         public int LocationID { get; set; }
         public int ManagerID { get; set; }
-        public string Country { get; set; }
-        public string City { get; set; }
-        public string Address { get; set; }
-        public string SectorName { get; set; }
-        public string GenderName { get; set; }
-        public string FullLocation { get; set; }
-        public string FullName { get; set; }
-        public string ManagerName { get; set; }
+    
+        public virtual tblGender tblGender { get; set; }
+        public virtual tblLocation tblLocation { get; set; }
+        public virtual tblSector tblSector { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblWorker> tblWorker1 { get; set; }
+        public virtual tblWorker tblWorker2 { get; set; }
     }
 }
