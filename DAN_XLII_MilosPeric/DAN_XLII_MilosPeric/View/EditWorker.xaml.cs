@@ -1,5 +1,5 @@
-﻿using DAN_XLII_MilosPeric.ViewModel;
-using System;
+﻿using System;
+using DAN_XLII_MilosPeric.ViewModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,20 +11,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DAN_XLII_MilosPeric.Model;
 
-namespace DAN_XLII_MilosPeric
+namespace DAN_XLII_MilosPeric.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for EditWorker.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class EditWorker : Window
     {
-        public MainWindow()
+        public EditWorker(vwWorker editWorker)
         {
             InitializeComponent();
-            this.DataContext = new MainWindowViewModel(this);
+            this.DataContext = new EditWorkerViewModel(this, editWorker);
         }
     }
 }

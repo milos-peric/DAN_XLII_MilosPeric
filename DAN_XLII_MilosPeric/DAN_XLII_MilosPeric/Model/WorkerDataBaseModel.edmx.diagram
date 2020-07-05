@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5c5551a71719485d83242551f7f52ac9" Name="Diagram1">
+        <EntityTypeShape EntityType="WorkerManagementModel.tblGender" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkerManagementModel.tblLocation" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkerManagementModel.tblSector" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkerManagementModel.tblWorker" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WorkerManagementModel.vwWorker" Width="1.5" PointX="5.75" PointY="1.875" IsExpanded="true" />
+        <AssociationConnector Association="WorkerManagementModel.FK_tblWorker_tblGender" ManuallyRouted="false" />
+        <AssociationConnector Association="WorkerManagementModel.FK_tblWorker_tblLocation" ManuallyRouted="false" />
+        <AssociationConnector Association="WorkerManagementModel.FK_tblWorker_tblSector" ManuallyRouted="false" />
+        <AssociationConnector Association="WorkerManagementModel.FK_tblWorker_tblWorker" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="WorkerManagementModel.vwLocation" Width="1.5" PointX="7.625" PointY="1.875" />
+        <EntityTypeShape EntityType="WorkerManagementModel.vwManager" Width="1.5" PointX="7.625" PointY="4.125" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
