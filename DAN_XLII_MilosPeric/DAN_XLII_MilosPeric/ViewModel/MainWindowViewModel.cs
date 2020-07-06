@@ -4,8 +4,11 @@ using DAN_XLII_MilosPeric.Utility;
 using DAN_XLII_MilosPeric.View;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -18,7 +21,8 @@ namespace DAN_XLII_MilosPeric.ViewModel
         DataBaseService _dataBaseService = new DataBaseService();
         List<vwLocation> LocationListFromDB = new List<vwLocation>();
         List<tblLocation> LocationListFromFile = new List<tblLocation>();
-
+        ActionEvent actionEventObject;
+        BackgroundWorker backgroundWorker1; 
 
         public MainWindowViewModel(MainWindow mainOpen)
         {
@@ -30,10 +34,16 @@ namespace DAN_XLII_MilosPeric.ViewModel
                 LocationListFromFile = LocationLoader.LoadLocations();
                 _dataBaseService.AddLocationsToDataBase(LocationListFromFile);
             }
-            foreach (var item in LocationListFromFile)
+            actionEventObject = new ActionEvent();
+            backgroundWorker1 = new BackgroundWorker()
             {
-                System.Diagnostics.Debug.WriteLine("Location: " + item.Address + item.City + item.Country);
-            }
+                WorkerReportsProgress = true,
+                WorkerSupportsCancellation = true,
+            };
+            backgroundWorker1.DoWork += DoWork;
+            //backgroundWorker1.RunWorkerCompleted += RunWorkerCompleted;
+            backgroundWorker1.RunWorkerAsync();
+            actionEventObject.ActionPerformed += ActionPerformed;
         }
 
         #region Properties
@@ -170,9 +180,12 @@ namespace DAN_XLII_MilosPeric.ViewModel
                     {
                         case MessageBoxResult.OK:
                             int _workerID = _worker.WorkerID;
-                            _dataBaseService.DeleteWorker(_workerID);
+                            _dataBaseService.DeleteWorker(_workerID);                           
+                            string logMessage = string.Format("Worker {0} {1} - JMBG:{2}, was deleted from database.", _worker.FirstName,
+                                _worker.LastName, _worker.JMBG);
+                            actionEventObject.OnActionPerformed(logMessage);
                             WorkerList = _dataBaseService.GetAllWorkerRecords().ToList();
-                            MessageBox.Show("Record deleted!", "Delete Record");
+                            MessageBox.Show("Record deleted!", "Delete Record");                            
                             break;
                         case MessageBoxResult.Cancel:
                             break;
@@ -195,5 +208,37 @@ namespace DAN_XLII_MilosPeric.ViewModel
                 return true;
             }
         }
+
+        private void DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                if (!Logger.logMessage.Equals(""))
+                {
+                    Logger.LogToFile();
+                    Debug.WriteLine("Action was logged to file Log.txt");
+                }
+                Thread.Sleep(200);
+
+                if (backgroundWorker1.CancellationPending)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+
+            }
+        }
+
+        //private void RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        //{
+            
+        //}
+
+        void ActionPerformed(object source, ActionEventArgs args)
+        {
+            Logger.logMessage = args.LogMessage;
+        }
     }
 }
+
+

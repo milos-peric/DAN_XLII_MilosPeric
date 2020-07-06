@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DAN_XLII_MilosPeric.Utility;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,8 +48,8 @@ namespace DAN_XLII_MilosPeric.Service
                     context.tblWorkers.Add(newWorker);
                     context.SaveChanges();
                     worker.WorkerID = newWorker.WorkerID;
-                    return worker;
-                }
+                    return worker;                   
+                }               
             }
             catch (Exception ex)
             {
@@ -73,7 +75,6 @@ namespace DAN_XLII_MilosPeric.Service
                     workerToEdit.SectorID = worker.SectorID;
                     workerToEdit.LocationID = worker.LocationID;
                     workerToEdit.ManagerID = worker.ManagerID;
-                    context.tblWorkers.Add(workerToEdit);
                     context.SaveChanges();
                     return worker;
                 }

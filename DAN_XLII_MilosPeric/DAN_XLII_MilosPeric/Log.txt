@@ -1,0 +1,3 @@
+6.7.2020. 13:20:49 - Worker Ranko Rankovic - JMBG:1110986130000, was deleted from database.
+6.7.2020. 13:40:36 - Worker Marko Markovic - JMBG:1912987159876, was added to database.
+6.7.2020. 13:59:25 - Worker Janko Jankovic - JMBG:1101990180021, data was edited to Pera Peric JMBG:0101900194020.

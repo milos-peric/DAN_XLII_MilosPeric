@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
+using DAN_XLII_MilosPeric.Utility;
+using System.Diagnostics;
 
 namespace DAN_XLII_MilosPeric.ViewModel
 {
@@ -13,6 +15,7 @@ namespace DAN_XLII_MilosPeric.ViewModel
     {
         AddWorker _addWorker;
         DataBaseService _dbService = new DataBaseService();
+        ActionEvent actionEventObject;
 
         public AddWorkerViewModel(AddWorker addEmployeeOpen)
         {
@@ -24,6 +27,8 @@ namespace DAN_XLII_MilosPeric.ViewModel
             GenderList = _dbService.GetAllGenders();
             SectorList = _dbService.GetAllSectors();
             ManagerList = _dbService.GetAllManagers();
+            actionEventObject = new ActionEvent();
+            actionEventObject.ActionPerformed += ActionPerformed;
         }
 
         //private DateTime _startDate = DateTime.Now;
@@ -242,7 +247,9 @@ namespace DAN_XLII_MilosPeric.ViewModel
                 Worker.LocationID = Location.LocationID;
                 _dbService.AddWorker(Worker);
                 IsUpdateWorker = true;
-                string str = Worker.DateOfBirth.ToString();
+                string logMessage = string.Format("Worker {0} {1} - JMBG:{2}, was added to database.", _worker.FirstName,
+                                _worker.LastName, _worker.JMBG);
+                actionEventObject.OnActionPerformed(logMessage);
                 MessageBox.Show("New Worker Added Successfully!", "Info");
                 _addWorker.Close();
             }
@@ -299,10 +306,14 @@ namespace DAN_XLII_MilosPeric.ViewModel
                 MessageBox.Show(ex.ToString());
             }
         }
-
         private bool CanCloseExecute()
         {
             return true;
+        }
+
+        void ActionPerformed(object source, ActionEventArgs args)
+        {
+            Logger.logMessage = args.LogMessage;
         }
     }
 }

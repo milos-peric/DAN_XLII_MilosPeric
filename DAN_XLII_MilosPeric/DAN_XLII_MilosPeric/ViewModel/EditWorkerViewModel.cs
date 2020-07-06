@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
+using DAN_XLII_MilosPeric.Utility;
 
 namespace DAN_XLII_MilosPeric.ViewModel
 {
@@ -16,6 +17,7 @@ namespace DAN_XLII_MilosPeric.ViewModel
     {
         EditWorker _editWorker;
         DataBaseService _dbService = new DataBaseService();
+        ActionEvent actionEventObject;
 
         public EditWorkerViewModel(EditWorker editWorkerOpen, vwWorker workerEdit)
         {
@@ -30,6 +32,11 @@ namespace DAN_XLII_MilosPeric.ViewModel
             GenderList = _dbService.GetAllGenders();
             SectorList = _dbService.GetAllSectors();
             ManagerList = _dbService.GetAllManagers();
+            FirstNameBeforeEdit = _worker.FirstName;
+            LastNameBeforeEdit = _worker.LastName;
+            JMBGBeforeEdit = _worker.JMBG;
+            actionEventObject = new ActionEvent();
+            actionEventObject.ActionPerformed += ActionPerformed;
         }
 
         #region Properties
@@ -46,6 +53,11 @@ namespace DAN_XLII_MilosPeric.ViewModel
                 OnPropertyChanged("Worker");
             }
         }
+
+        public string FirstNameBeforeEdit { get; set; }
+        public string LastNameBeforeEdit { get; set; }
+        public string JMBGBeforeEdit { get; set; }
+
 
         private tblGender _gender;
         public tblGender Gender
@@ -236,14 +248,15 @@ namespace DAN_XLII_MilosPeric.ViewModel
                     MessageBox.Show("Phone number you entered is not in correct format. Please try again", "Invalid input");
                     return;
                 }
-
                 Worker.GenderID = Gender.GenderID;
                 Worker.SectorID = Sector.SectorID;
                 Worker.ManagerID = Manager.WorkerID;
                 Worker.LocationID = Location.LocationID;
                 _dbService.EditWorker(Worker);
                 IsUpdateWorker = true;
-                string str = Worker.DateOfBirth.ToString();
+                string logMessage = string.Format("Worker {0} {1} - JMBG:{2}, data was edited to {3} {4} JMBG:{5}.", FirstNameBeforeEdit, 
+                    LastNameBeforeEdit, JMBGBeforeEdit, _worker.FirstName, _worker.LastName, _worker.JMBG);
+                actionEventObject.OnActionPerformed(logMessage);
                 MessageBox.Show("Worker Edited Successfully!", "Info");
                 _editWorker.Close();
             }
@@ -304,6 +317,11 @@ namespace DAN_XLII_MilosPeric.ViewModel
         private bool CanCloseExecute()
         {
             return true;
+        }
+
+        void ActionPerformed(object source, ActionEventArgs args)
+        {
+            Logger.logMessage = args.LogMessage;
         }
     }
 
